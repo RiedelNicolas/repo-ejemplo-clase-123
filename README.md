@@ -5,7 +5,7 @@ Ejemplo de despliegue para la materia Introducción al desarrollo de Software - 
 ## Descripción
 
 Esta es una aplicación de ejemplo para la materia Introducción al Desarrollo de Software. La aplicación permite:
-- Cargar links a videos con su descripción
+- Cargar videos de Youtube
 - Ver una lista de todos los videos recomendados por otros usuarios
 
 ## Arquitectura
