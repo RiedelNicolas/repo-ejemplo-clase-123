@@ -23,7 +23,3 @@ El proyecto está dividido en tres componentes principales:
 ### Base de Datos
 - Tecnología: PostgreSQL
 - Despliegue: Supabase
-
-## Uso local
-Ademas de estos despliegues, la aplicacion se puede levantar localmente con `docker compose up --build`
-
