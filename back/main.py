@@ -8,20 +8,25 @@ from dotenv import load_dotenv
 
 app = FastAPI()
 
+load_dotenv()
+DATABASE_URL = getenv("DATABASE_URL")
+FRONTEND_URL = getenv("FRONTEND_URL")
+
+if not DATABASE_URL:
+    raise ValueError("DATABASE_URL environment variable is not set")
+if not FRONTEND_URL:
+    raise ValueError("FRONTEND_URL environment variable is not set")
+
+
 app.add_middleware(
     CORSMiddleware,
-    allow_origins=["*"],
+    allow_origins=[FRONTEND_URL],
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
 )
 
-load_dotenv()
-DATABASE_URL = getenv("DATABASE_URL")
-if not DATABASE_URL:
-    raise ValueError("DATABASE_URL environment variable is not set")
 engine = create_engine(DATABASE_URL)
-
 
 def get_session():
     with Session(engine) as session:
