@@ -3,6 +3,9 @@ from fastapi.middleware.cors import CORSMiddleware
 from typing import Annotated
 from pydantic import Field
 from sqlmodel import Field, Session, SQLModel, create_engine, SQLModel, select
+from os import getenv
+from dotenv import load_dotenv
+
 app = FastAPI()
 
 app.add_middleware(
@@ -13,7 +16,10 @@ app.add_middleware(
     allow_headers=["*"],
 )
 
-DATABASE_URL = ""
+load_dotenv()
+DATABASE_URL = getenv("DATABASE_URL")
+if not DATABASE_URL:
+    raise ValueError("DATABASE_URL environment variable is not set")
 engine = create_engine(DATABASE_URL)
 
 
