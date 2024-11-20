@@ -10,7 +10,7 @@ function App() {
           <h1>Ejemplo de despliegue</h1>
           <p className="subtitle">
             Ejemplo simple pero funcional de una aplicación web full stack usando <strong>React</strong>, 
-             <strong>FastAPI</strong> y <strong>PostgreSQL</strong>
+             <strong> FastAPI</strong> y <strong>PostgreSQL</strong>
           </p>
           <p className="subtitle-description">
              Este ejemplo simplemente permite cargar un video de youtube y ver que videos cargaron el resto de los alumnos.

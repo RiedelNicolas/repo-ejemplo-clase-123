@@ -19,6 +19,15 @@ export const fetchVideos = async () => {
 }
 
 export const addVideoRequest= async (url: string, description: string) => {
-    const response = await axiosInstance.post('/videos', {"video":{ url, description }})
-    return response.data
+
+    try {
+        const response = await axiosInstance.post('/videos', {"video":{ url, description }})
+
+        return response.data
+    } catch (error) {
+        if (axios.isAxiosError(error) && error.response?.data?.detail) {
+            throw new Error(error.response.data.detail)
+        }
+        throw new Error('Failed to add video')
+    }
 }

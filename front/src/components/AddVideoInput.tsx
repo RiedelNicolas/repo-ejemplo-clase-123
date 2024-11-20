@@ -9,7 +9,31 @@ export const AddVideoInput = () => {
     const [description, setDescription] = useState('')
     const [error, setError] = useState('')
     const [isPending, setIsPending] = useState(false);
-    const { addVideo } = useAddVideo()
+
+    const { addVideo } = useAddVideo ({
+        videoURL: videoUrl,
+        description: description,
+        onSuccess: () => {
+            handleCloseModal();
+        },
+        onError: (error) => {
+            setError(error)
+            setIsPending(false)
+        }
+    })
+
+    const handleCloseModal = () => {
+        setIsModalOpen(false)
+        setVideoUrl('')
+        setDescription('')
+        setError('')
+        setIsPending(false)
+    }
+
+    const handleSubmit = () => {
+        setIsPending(true)
+        addVideo()
+    }
 
 
     const handleDescriptionChange = (e: React.ChangeEvent<HTMLTextAreaElement>) => {
@@ -17,19 +41,6 @@ export const AddVideoInput = () => {
         if (newValue.length <= MAX_DESCRIPTION_LENGTH) {
             setDescription(newValue)
         }
-    }
-
-    const handleAddVideo = () => {
-        if (!videoUrl || !description) return
-        addVideo(videoUrl, description, () => {
-            setIsModalOpen(false)
-            setVideoUrl('')
-            setDescription('')
-            setIsPending(false)
-        }, (error) => {
-            setError(error)
-            setIsPending(false)
-        })
     }
 
     return (
@@ -81,7 +92,7 @@ export const AddVideoInput = () => {
                         </div>
                         <button 
                             className="submit-button"
-                            onClick={handleAddVideo}
+                            onClick={()=>{handleSubmit()}}
                             disabled={isPending || !videoUrl || !description}
                         >
                             {isPending ? 'Agregando...' : 'Agregar Video'}
