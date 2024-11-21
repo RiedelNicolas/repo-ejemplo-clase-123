@@ -7,7 +7,7 @@ function App() {
     <div className="page-container">
       <header className="header">
         <div className="title-section">
-          <h1>Ejemplo de despliegue</h1>
+          <h1>Ejemplo de despliegue 123</h1>
           <p className="subtitle">
             Ejemplo simple pero funcional de una aplicación web full stack usando <strong>React</strong>, 
              <strong> FastAPI</strong> y <strong>PostgreSQL</strong>
