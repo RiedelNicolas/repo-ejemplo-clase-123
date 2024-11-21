@@ -1,0 +1,28 @@
+name: DeployPagina
+
+on:
+    push:
+        branches:
+        - main
+
+jobs:
+    build:
+        runs-on: ubuntu-latest
+        steps:
+            -   name: Checkout
+                uses: actions/checkout@v4
+            -   name: Setup Node
+                uses: actions/setup-node@v4
+                with:
+                    node-version: '20'
+            -   name: Install dependencies
+                run: cd front && npm install
+            -   name: Build
+                run: cd front && npm run build
+                env:
+                    VITE_BACKEND_URL: ${{ secrets.VITE_BACKEND_URL }}
+            -   name: Deploy ##Este paso, si lo necesitan ustedes
+                uses: peaceiris/actions-gh-pages@v3
+                with:
+                    github_token: ${{ secrets.GITHUB_TOKEN }}
+                    publish_dir: ./front/dist #El directorio donde tengo mi index.html
